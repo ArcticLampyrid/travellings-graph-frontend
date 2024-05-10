@@ -1,0 +1,38 @@
+.top-navigation {
+    padding: 0.5rem;
+    border-bottom: 1px solid #d3d3d3;
+}
+
+.main-nav {
+    display: flex;
+    justify-content: center;
+}
+
+ul.main-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1rem;
+}
+
+ul.main-menu li a {
+    padding: 0.5rem;
+    text-decoration: none;
+    color: black;
+    border-radius: 0.5rem;
+    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+
+ul.main-menu li a:hover {
+    color: #d00058;
+    background-color: #ff2a5130;
+}
+
+ul.main-menu li a.active {
+    color: #d00058;
+}
+
+.main {
+    margin: 0.5em;
+}

@@ -1,0 +1,75 @@
+.contentTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    border: 1px solid #ddd;
+}
+
+.contentTable th {
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.contentTable tr {
+    border: 1px solid #ddd;
+}
+
+.col-id {
+    width: 4em;
+}
+
+.links-page {
+    float: right;
+}
+
+.col-outgoing-total,
+.col-incoming-total,
+.col-outgoing-avg-distance,
+.col-incoming-avg-distance,
+.col-outgoing-6degrees,
+.col-incoming-6degrees {
+    width: 5em;
+    text-align: right;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination a {
+    text-decoration: none;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.pagination a:hover {
+    background-color: #ff2a5130;
+}
+
+.pagination-page-num,
+.pagination-page-ellipsis {
+    padding: 0.5em;
+    border-radius: 0.5rem;
+}
+
+.pagination-page-num {
+    cursor: pointer;
+    color: #d00058;
+}
+
+.pagination-page-current {
+    color: black;
+    background-color: #ff2a5130;
+}
+
+.pagination-page-previous,
+.pagination-page-next {
+    padding: 0.5em;
+    border-radius: 0.5rem;
+}
+
+a.pagination-page-previous,
+a.pagination-page-next {
+    color: #d00058;
+}

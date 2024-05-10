@@ -1,0 +1,25 @@
+ol.link-paths {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ol.link-paths li {
+    display: inline;
+}
+
+ol.link-paths li:not(:last-child)::after {
+    content: " --> "
+}
+
+#query-shortest-paths-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.form-operation-area {
+    display: flex;
+    margin-top: 0.25em;
+    justify-content: right;
+}
