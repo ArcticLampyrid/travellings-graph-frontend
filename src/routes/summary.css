@@ -73,3 +73,20 @@ a.pagination-page-previous,
 a.pagination-page-next {
     color: #d00058;
 }
+
+#search-form {
+    display: flex;
+    align-items: center;
+}
+
+#search-label {
+    margin-right: 0.5rem;
+}
+
+#search-input {
+    flex-grow: 1;
+}
+
+#search-submit {
+    margin-left: 0.5rem;
+}

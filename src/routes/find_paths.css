@@ -23,3 +23,7 @@ ol.link-paths li:not(:last-child)::after {
     margin-top: 0.25em;
     justify-content: right;
 }
+
+#query-shortest-paths input {
+    display: block;
+}

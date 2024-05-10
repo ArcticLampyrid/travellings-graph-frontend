@@ -155,6 +155,9 @@ export interface operations {
   /** Get Analysis By Page */
   get_analysis_by_page_v1_analysis_page__page__get: {
     parameters: {
+      query?: {
+        q?: string | null;
+      };
       path: {
         page: number;
       };

@@ -1,15 +1,19 @@
 import backend from "../api/backend"
-import { Link, useLoaderData } from "react-router-dom";
+import { Form, Link, useLoaderData } from "react-router-dom";
 import './summary.css';
 import React from "react";
 import { components } from "../api/types";
 import { useTranslation } from "react-i18next";
 
-export async function loader({ params }) {
+export async function loader({ request, params }) {
+    const q = new URL(request.url).searchParams.get('q') || null;
     return await backend.GET('/v1/analysis/page/{page}', {
         params: {
             path: {
                 page: params.page || 1
+            },
+            query: {
+                q: q
             }
         }
     })
@@ -38,8 +42,21 @@ function Summary() {
     const pageCount = pageData.data.total_page;
     const pageIndex = pageData.data.page;
     const pageContent = pageData.data.items;
+    const searchParams = new URLSearchParams(window.location.search);
+    const q = searchParams.get('q');
+    const urlForPage = (page: number) => {
+        if (page === 1) {
+            return "/summary" + (q ? `?q=${encodeURIComponent(q)}` : '');
+        }
+        return `/summary/${page}` + (q ? `?q=${encodeURIComponent(q)}` : '');
+    }
     return (
         <>
+            <Form method="GET" id="search-form" action="/summary">
+                <label id="search-label">{t("Summary.Search")}</label>
+                <input id="search-input" type="text" name="q" placeholder={t("Summary.Search.Placeholder")} defaultValue={q || ''} />
+                <button id="search-submit" type="submit">{t("Summary.SubmitSearch")}</button>
+            </Form>
             <div className="content">
                 <table className="contentTable">
                     <tr>
@@ -76,39 +93,39 @@ function Summary() {
             </div>
             <div className="pagination">
                 {pageIndex > 1 &&
-                    <Link className="pagination-page-num" to={`/summary/1`}>1</Link>
+                    <Link className="pagination-page-num" to={urlForPage(1)}>1</Link>
                 }
                 {pageIndex > 4 &&
                     <span className="pagination-page-ellipsis">...</span>
                 }
                 {pageIndex > 3 &&
-                    <Link className="pagination-page-num" to={`/summary/${pageIndex - 2}`}>{pageIndex - 2}</Link>
+                    <Link className="pagination-page-num" to={urlForPage(pageIndex - 2)}>{pageIndex - 2}</Link>
                 }
                 {pageIndex > 2 &&
-                    <Link className="pagination-page-num" to={`/summary/${pageIndex - 1}`}>{pageIndex - 1}</Link>
+                    <Link className="pagination-page-num" to={urlForPage(pageIndex - 1)}>{pageIndex - 1}</Link>
                 }
-                <Link className="pagination-page-num pagination-page-current" to={`/summary/${pageIndex}`}>{pageIndex}</Link>
+                <Link className="pagination-page-num pagination-page-current" to={urlForPage(pageIndex)}>{pageIndex}</Link>
                 {pageIndex < pageCount - 1 &&
-                    <Link className="pagination-page-num" to={`/summary/${pageIndex + 1}`}>{pageIndex + 1}</Link>
+                    <Link className="pagination-page-num" to={urlForPage(pageIndex + 1)}>{pageIndex + 1}</Link>
                 }
                 {pageIndex < pageCount - 2 &&
-                    <Link className="pagination-page-num" to={`/summary/${pageIndex + 2}`}>{pageIndex + 2}</Link>
+                    <Link className="pagination-page-num" to={urlForPage(pageIndex + 2)}>{pageIndex + 2}</Link>
                 }
                 {pageIndex < pageCount - 3 &&
                     <span className="pagination-page-ellipsis">...</span>
                 }
                 {pageIndex < pageCount &&
-                    <Link className="pagination-page-num" to={`/summary/${pageCount}`}>{pageCount}</Link>
+                    <Link className="pagination-page-num" to={urlForPage(pageCount)}>{pageCount}</Link>
                 }
             </div>
             <div className="pagination">
                 {pageIndex > 1 &&
-                    <Link className="pagination-page-previous" to={`/summary/${pageIndex - 1}`}>{t("Pagination.Previous")}</Link> ||
+                    <Link className="pagination-page-previous" to={urlForPage(pageIndex - 1)}>{t("Pagination.Previous")}</Link> ||
                     <span className="pagination-page-previous">{t("Pagination.Previous")}</span>
                 }
 
                 {pageIndex < pageCount &&
-                    <Link className="pagination-page-next" to={`/summary/${pageIndex + 1}`}>{t("Pagination.Next")}</Link> ||
+                    <Link className="pagination-page-next" to={urlForPage(pageIndex + 1)}>{t("Pagination.Next")}</Link> ||
                     <span className="pagination-page-next" >{t("Pagination.Next")}</span>
                 }
             </div>
