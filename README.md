@@ -7,3 +7,6 @@ docker buildx build -t travellings-graph-frontend . --build-arg API_URL=http://l
 docker run -d -p 8080:80 travellings-graph-frontend
 ```
 The `API_URL` build argument specifies the URL of the API server.
+
+## License
+Licensed under the [MIT License](LICENSE).
