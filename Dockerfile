@@ -8,8 +8,7 @@ ARG api_url
 ENV VITE_API_URL=$api_url
 RUN npm run build
 
-FROM nginx:alpine
-COPY --from=builder /app/dist /usr/share/nginx/html
-COPY docker/nginx.conf /etc/nginx/nginx.conf
+FROM joseluisq/static-web-server:2
+COPY --from=builder /app/dist /app
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["--root", "/app", "--page-fallback", "/app/index.html"]
