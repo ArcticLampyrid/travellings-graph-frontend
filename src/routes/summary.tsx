@@ -57,6 +57,12 @@ function Summary() {
                 <input id="search-input" type="text" name="q" placeholder={t("Summary.Search.Placeholder")} defaultValue={q || ''} />
                 <button id="search-submit" type="submit">{t("Summary.SubmitSearch")}</button>
             </Form>
+            <header className="build-info">
+                <span>{t("Summary.BuildInfo.BuildTime", {"build-time": new Date(pageData.data.build_info.build_time).toLocaleString(undefined, {timeZoneName: "short"})})}</span>
+                <span>{t("Summary.BuildInfo.Members", {"members": pageData.data.build_info.members})}</span>
+                <span>{t("Summary.BuildInfo.Connections", {"connections": pageData.data.build_info.connections})}</span>
+                <span>{t("Summary.BuildInfo.AvgConnections", {"avg-connections": pageData.data.build_info.average_connections.toLocaleString(undefined, { maximumFractionDigits: 4, minimumFractionDigits: 4 })})}</span>
+            </header>
             <div className="content">
                 <table className="contentTable">
                     <tr>

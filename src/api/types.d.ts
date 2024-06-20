@@ -63,8 +63,20 @@ export interface components {
       /** Url */
       url: string;
     };
+    /** BuildInfo */
+    BuildInfo: {
+      /** Build Time */
+      build_time: string;
+      /** Members */
+      members: number;
+      /** Connections */
+      connections: number;
+      /** Average Connections */
+      average_connections: number;
+    };
     /** GetAnalysisAllResponse */
     GetAnalysisAllResponse: {
+      build_info: components["schemas"]["BuildInfo"];
       /** Total */
       total: number;
       /** Items */
@@ -72,6 +84,7 @@ export interface components {
     };
     /** GetAnalysisByPageResponse */
     GetAnalysisByPageResponse: {
+      build_info: components["schemas"]["BuildInfo"];
       /** Total Items */
       total_items: number;
       /** Total Page */
